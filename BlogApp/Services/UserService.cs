@@ -12,8 +12,8 @@ public class UserService
     {
         _dataContext=dataContext;
     }
-    
-    public UserModel Create(UserModel userModel) 
+
+    public UserModel Create(UserModel userModel)
     {
         User newUser = new User
         {
@@ -29,25 +29,25 @@ public class UserService
         return userModel;
     }
 
-    public UserModel Update(UserModel userModel)
-    {
-        User userToUpdate = _dataContext.Users.FirstOrDefault(x => x.Id == userModel.Id);
+    //public UserModel Update(UserModel userModel)
+    //{
+    //    User userToUpdate = _dataContext.Users.FirstOrDefault(x => x.Id == userModel.Id);
 
-        if (userToUpdate == null)
-            return null;
+    //    if (userToUpdate == null)
+    //        return null;
 
-        User newUser = new User()
-        {
-            userToUpdate.Name = userModel.Name,
-            userToUpdate.Email = userModel.Email,
-            userToUpdate.Password = userModel.Password,
-            userToUpdate.Description = userModel.Description,
-            userToUpdate.Photo = userModel.Photo
-        };
-        _dataContext.Users.Add(userToUpdate);
-        _dataContext.SaveChanges();
-        return userModel;
-    }
+    //    User newUser = new User
+    //    {
+    //        userToUpdate.Name = userModel.Name,
+    //        userToUpdate.Email = userModel.Email,
+    //        userToUpdate.Password = userModel.Password,
+    //        userToUpdate.Description = userModel.Description,
+    //        userToUpdate.Photo = userModel.Photo
+    //    };
+    //    _dataContext.Users.Add(userToUpdate);
+    //    _dataContext.SaveChanges();
+    //    return userModel;
+    //}
 
     public void DeleteUser(User user)
     {
@@ -57,17 +57,11 @@ public class UserService
 
     public UserModel Update(User userToUpdate, UserModel userModel)
     {
-        if (userToUpdate == null)
-            return null;
-
-        User newUser = new User()
-        {
-            userToUpdate.Name = userModel.Name,
-            userToUpdate.Email = userModel.Email,
-            userToUpdate.Password = userModel.Password,
-            userToUpdate.Description = userModel.Description,
-            userToUpdate.Photo = userModel.Photo
-        };
+        userToUpdate.Name = userModel.Name;
+        userToUpdate.Email = userModel.Email;
+        userToUpdate.Password = userModel.Password;
+        userToUpdate.Description = userModel.Description;
+        userToUpdate.Photo = userModel.Photo;
         _dataContext.Users.Add(userToUpdate);
         _dataContext.SaveChanges();
         return userModel;
@@ -85,7 +79,7 @@ public class UserService
             var encoding = Encoding.GetEncoding("iso-8859-1");
             string[] namePassArray = encoding.GetString(Convert.FromBase64String(encodedUserNamePass)).Split(':');
             userName = namePassArray[0];
-            userPass = namePassArray[1];    
+            userPass = namePassArray[1];
         }
         return (userName, userPass);
     }
