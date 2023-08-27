@@ -25,7 +25,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddDbContext<MyAppDataContext>(options => options.UseSqlServer("Server=(localdb)\\msscllocaldb;Database=BlogAppDb;Trusted_Connection=True"));
+builder.Services.AddDbContext<MyAppDataContext>(options => options.UseSqlServer(@"Data Source=CL-APSK-0017\SQLEXPRESS01;Database=blogAppDb;Trusted_Connection=True;TrustServerCertificate=True;"));
 
 var app = builder.Build();
 
